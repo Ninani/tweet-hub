@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>App</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel='stylesheet' href='/css/style.css' />
+  </head>
+  <body>
+  
+    <% if (loggedin != undefined) { %>
+      <ul>
+        <li><a href="#">admin</a></li>
+        <li><a href="/logout">logout</a></li>
+      </ul>
+    <% } else { %>
+      <a href="/auth/twitter">login</a>
+    <% } %>
+
+
+      <% if(loggedin != undefined) { %>
+       <h1> Welcome <%= user.name %></h1>
+       <% } %>
+    
+    <div user-data="{id: <%= user.id %>}" id="app"></div>
+
+    <script src="/js/libs/jquery/dist/jquery.js"></script>
+    <script src="/js/libs/underscore/underscore.js"></script>
+    <script src="/js/libs/backbone/backbone.js"></script>
+    <script src="/js/libs/handlebars/handlebars.js"></script>
+    <script src="/js/hbs/templates.js"></script>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

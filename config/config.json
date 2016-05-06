@@ -1,0 +1,7 @@
+{
+	"mongodb": "mongodb://localhost/temp",
+	"twitter": {
+		"key": "#",
+		"secret": "#"
+	}
+}
