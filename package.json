@@ -21,7 +21,6 @@
     "chai": "*"
   },
   "scripts": {
-    "prestart": "grunt handlebars",
     "start": "node app.js",
     "postinstall": "bower install"
   }
