@@ -6,9 +6,16 @@
     <link rel='stylesheet' href='css/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <h1><a href="/auth/twitter">Sign in</a></h1>
-    
+    <header>
+      <div class="jumbotron text-center">
+        <div class="container">
+          <h1><%= title %></h1>
+          <p> Click sign in to start. </p>
+          <h1><a href="/auth/twitter" class="btn btn-primary btn-lg">Sign in</a></h1>
+        </div>
+      </div>
+
+    </header>
+
   </body>
 </html>

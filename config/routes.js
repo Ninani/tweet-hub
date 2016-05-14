@@ -2,8 +2,7 @@
 // Controllers
 var index = require('../app/controllers/index.js')
 var users = require('../app/controllers/users.js')
-
-//var twitter = require('../controllers/twitter.js')
+// var twitter = require('../app/controllers/twitter.js')
 
 // Models
 var User = require('../app/models/user.js');
@@ -22,6 +21,7 @@ module.exports = function (app) {
 	    next();
 	  });
 	});
+	
 
 	/* Users */
 	app.get('/users', 		users.index);

@@ -10,6 +10,7 @@ var UserSchema = new mongoose.Schema({
 	twitter_username: String,
 	twitter_key: String,
 	twitter_secret: String,
+	categories: [{title: String, keyword: String}]
 })
 
 var autoIncrement = require('mongoose-auto-increment')
