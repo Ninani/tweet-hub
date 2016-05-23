@@ -26,7 +26,7 @@ module.exports = function (app) {
 	/* Users */
 	app.get('/users', 		users.index);
 	app.post('/users/new', 	users.create);
-	app.get('/users/:id', users.read);
+	app.get('/profile', isAuthenticated, users.read);
 	app.put('/users/:id', users.update);
 	app.delete('/users/:id',users.delete);
 
@@ -45,8 +45,14 @@ module.exports = function (app) {
 		passport.authenticate('twitter', {failureRedirect: '/signin'}),
 		function (req, res) {
 			req.session.alive = true;
-			res.redirect('/users/'+req.user.id)
+			res.redirect('/profile')
 		})
 
 
+}
+
+function isAuthenticated(req, res, next) {
+	if (req.isAuthenticated()) {return next();}
+	res.redirect('/');
+	
 }

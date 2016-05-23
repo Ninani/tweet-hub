@@ -28,7 +28,7 @@ exports.read = function (req, res) {
 			res.send(404)
 		} else {
 			res.render('profile', {
-				user: user, 
+				user: req.user,
 				loggedin: req.session.alive
 			})
 		}

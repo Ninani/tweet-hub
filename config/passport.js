@@ -7,19 +7,17 @@ module.exports = function(app) {
 
 	var TwitterStrategy = passportTwitter.Strategy
 	passport.serializeUser(function(user, done) {
-    	done(null, user._id)
+    	done(null, user)
 	})
 	passport.deserializeUser(function(obj, done) {
-    	User.findById(obj, function(err, user) {
-    		done(err, user)
-    	})
+		done(null, obj)
   	})
 
 
 	passport.use(new TwitterStrategy({
 		consumerKey: config.twitter.key,
 		consumerSecret: config.twitter.secret,
-		callbackURL: 'http://localhost:3000/auth/twitter/callback'
+		callbackURL: config.twitter.callback
 	}, function(token, tokenSecret, profile, done) {
 		User.findOneAndUpdate({twitter_id: profile.id}, {
 			name: profile.displayName,
