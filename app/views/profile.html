@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="twitterModule">
   <head>
     <title>TweetHub</title>
     <link rel="stylesheet" href="/css/bootstrap.css">
@@ -7,7 +7,7 @@
     <!-- Custom CSS -->
     <link href="/css/simple-sidebar.css" rel="stylesheet">
   </head>
-  <body>
+  <body ng-controller="mainController">
 
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container-fluid">
@@ -41,28 +41,49 @@
       </div>
     </nav>
 
-
-    <!--<div user-data="{id: <%= user.id %>}" id="app">tadam</div>-->
-
     <div id="wrapper">
 
       <!-- Sidebar -->
       <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
           <li><br><br></li>
-          <li class="sidebar-brand">
-            <a href="#">
-              Categories
-            </a>
-          </li>
           <li>
-            <a href="#">Category 1</a>
+            <div id="category-form" class="row">
+              <div class="col-sm-8 col-sm-offset-2 text-center">
+                <form>
+                  <div class="form-group">
+
+                    <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
+                    <input type="text" class="form-control input-lg text-center" placeholder="New category" ng-model="formData.text">
+                  </div>
+
+                  <!-- createToDo() WILL CREATE NEW CATEGORIES -->
+                  <button type="submit" class="btn btn-primary btn-lg" ng-click="createCategory()">Add</button>
+                </form>
+              </div>
+            </div>
           </li>
+          <li><br></li>
           <li>
-            <a href="#">Category 2</a>
+            <div id="category-list" class="row">
+              <div class="col-sm-8 text-center">
+
+                <!-- LOOP OVER THE CATEGORIES IN $scope.categories -->
+                <div class="checkbox" ng-repeat="category in categories">
+                  <h4>
+                    <label>
+                      <!--<input type="checkbox" ng-click="deleteCategory(category._id)"> -->
+                      {{ category.text }}
+                    </label>
+                  </h4>
+                </div>
+
+              </div>
+            </div>
           </li>
         </ul>
       </div>
+
       <!-- /#sidebar-wrapper -->
 
       <!-- Page Content -->
@@ -71,8 +92,9 @@
           <div class="row">
             <br><br>
             <div class="col-lg-12">
-              <h1>TweetHub</h1>
+              <br><br>
               <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Categories</a>
+
             </div>
           </div>
         </div>
@@ -97,9 +119,12 @@
 
     <script src="/js/libs/jquery/dist/jquery.js"></script>
     <script src="/js/libs/underscore/underscore.js"></script>
-    <script src="/js/libs/backbone/backbone.js"></script>
-    <!--<script src="/js/libs/handlebars/handlebars.js"></script>-->
+    <!--<script src="/js/libs/backbone/backbone.js"></script>-->
+    <script src="/js/libs/handlebars/handlebars.js"></script>
     <!--<script src="/js/hbs/templates.js"></script>-->
     <!--<script src="/js/main.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+    <script src="twittercore.js"></script>
+
   </body>
 </html>

@@ -2,7 +2,7 @@
 // Controllers
 var index = require('../app/controllers/index.js')
 var users = require('../app/controllers/users.js')
-// var twitter = require('../app/controllers/twitter.js')
+var categories = require('../app/controllers/category.js')
 
 // Models
 var User = require('../app/models/user.js');
@@ -24,11 +24,16 @@ module.exports = function (app) {
 	
 
 	/* Users */
-	app.get('/users', 		users.index);
+	// app.get('/users', 		users.index);
 	app.post('/users/new', 	users.create);
 	app.get('/profile', isAuthenticated, users.read);
-	app.put('/users/:id', users.update);
-	app.delete('/users/:id',users.delete);
+	// app.put('/users/:id', users.update);
+	app.delete('/delete/:id',users.delete);
+	
+	/* Categories */
+	app.get('/api/categories', isAuthenticated, categories.index);
+	app.post('/api/categories', isAuthenticated, categories.create);
+	app.delete('api/categories/:category_id', isAuthenticated, categories.delete);
 
 
 	/* Sessions */

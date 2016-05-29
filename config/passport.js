@@ -24,7 +24,8 @@ module.exports = function(app) {
 			twitter_id: profile.id,
 			twitter_username: profile.username,
 			twitter_key: token,
-			twitter_secret: tokenSecret
+			twitter_secret: tokenSecret,
+			category: {name: 'General'}
 		}, function(err, user) {
 			console.log(user)
 			if (err) {
@@ -37,7 +38,8 @@ module.exports = function(app) {
 					twitter_id: profile.id,
 					twitter_username: profile.username,
 					twitter_key: token,
-					twitter_secret: tokenSecret
+					twitter_secret: tokenSecret,
+					category: {name: 'General'}
 				}, done)
 			} else {
 				done(err, user)
@@ -45,8 +47,8 @@ module.exports = function(app) {
 		})
 	}))
 
-app.use(passport.initialize())
-app.use(passport.session())
+	app.use(passport.initialize())
+	app.use(passport.session())
 
 	return passport
 }

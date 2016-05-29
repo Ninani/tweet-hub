@@ -1,4 +1,10 @@
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
+
+var Category = require('../models/category.js');
+
+// var CategorySchema = new mongoose.Schema({
+// 	name: String
+// });
 
 var UserSchema = new mongoose.Schema({
 	id: {
@@ -9,9 +15,9 @@ var UserSchema = new mongoose.Schema({
 	twitter_id: String,
 	twitter_username: String,
 	twitter_key: String,
-	twitter_secret: String,
-	categories: [{title: String, keyword: String}]
-})
+	twitter_secret: String
+});
+
 
 var autoIncrement = require('mongoose-auto-increment')
 var db = require('../../db/connect')
