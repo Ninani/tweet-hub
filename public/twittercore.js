@@ -26,6 +26,16 @@ function mainController($scope, $http) {
                 console.log('Error: ' + data);
             });
     };
+
+    $scope.showCategory = function(id, category) {
+        $scope.thisCategory = category;
+        $http.get('/api/thiscategory/' + id)
+            .success(function (data) {
+                $scope.tweets = data;
+                console.log(data);
+            })
+            .error();
+    };
     
     $scope.deleteCategory = function(id) {
         $http.delete('/api/categories/' + id)
