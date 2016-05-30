@@ -3,7 +3,7 @@
 var index = require('../app/controllers/index.js')
 var users = require('../app/controllers/users.js')
 var categories = require('../app/controllers/category.js')
-
+var twitter = require('../app/controllers/twitter.js')
 // Models
 var User = require('../app/models/user.js');
 
@@ -34,6 +34,9 @@ module.exports = function (app) {
 	app.get('/api/categories', isAuthenticated, categories.index);
 	app.post('/api/categories', isAuthenticated, categories.create);
 	app.delete('api/categories/:category_id', isAuthenticated, categories.delete);
+
+	/* Twitter */
+	app.get('/api/thiscategory/:category_id', twitter.show);
 
 	/* Sessions */
 	var passport = require('./passport')(app)
