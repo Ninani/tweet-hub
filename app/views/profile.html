@@ -98,11 +98,24 @@
             <div class="text-center">
               <h2>{{thisCategory.text | uppercase}}</h2>
             </div>
+            <div id="followed-form" class="row">
+              <div class="col-sm-8 col-sm-offset-2 text-center">
+                <form>
+                  <div class="form-group">
+
+                    <input type="text" class="form-control input-lg text-center" placeholder="user name" ng-model="userForm.text">
+                  </div>
+
+                  <!-- createToDo() WILL CREATE NEW CATEGORIES -->
+                  <button type="submit" class="btn btn-primary btn-lg" ng-click="createFollowedUser(thisCategory._id)">Follow</button>
+                </form>
+              </div>
+            </div>
             <div ng-repeat="tweet in tweets">
               <br>
-              <h4>
+              <h5>
                 {{ tweet.text }}
-              </h4>
+              </h5>
             </div>
           </div>
         </div>

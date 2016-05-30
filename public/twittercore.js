@@ -3,6 +3,8 @@ var twitterModule = angular.module('twitterModule', []);
 
 function mainController($scope, $http) {
     $scope.formData = {};
+    
+    $scope.userForm = {};
 
     // when landing on the page, get all categories and show them
     $http.get('/api/categories')
@@ -41,6 +43,39 @@ function mainController($scope, $http) {
         $http.delete('/api/categories/' + id)
             .success(function(data) {
                 $scope.categories = data;
+                console.log(data);
+            })
+            .error(function(data) {
+                console.log('Error: ' + data);
+            });
+    };
+    
+    $scope.showFollowedUsers = function (category_id) {
+        $http.get('/api/followed/' + category_id)
+            .success(function (data) {
+                $scope.followed = data;
+                console.log(data);
+            })
+            .error();
+    }
+
+
+    $scope.createFollowedUser = function(category_id) {
+        $http.post('/api/followed/' + category_id, $scope.userForm)
+            .success(function(data) {
+                $scope.userForm = {}; // clear the form so our user is ready to enter another
+                $scope.followed = data;
+                console.log(data);
+            })
+            .error(function(data) {
+                console.log('Error: ' + data);
+            });
+    };
+
+    $scope.deleteCategory = function(category_id, followed_name) {
+        $http.delete('/api/followed/' + category_id + '/' + followed_name)
+            .success(function(data) {
+                $scope.followed = data;
                 console.log(data);
             })
             .error(function(data) {
