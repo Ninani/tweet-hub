@@ -17,17 +17,18 @@ app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/app/views');
 app.set('view engine', 'html');
 
-app.use(express.favicon());
+// app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
-app.use(express.cookieParser())
-app.use(express.json())
-app.use(express.urlencoded())
+app.use(express.cookieParser());
+app.use(express.json());
+app.use(express.urlencoded());
 app.use(express.methodOverride());
+app.use(express.session({ secret: 'sooo secret' }));
 
-app.use(passport.initialize())
-app.use(passport.session())
-app.use(express.session({ secret: 'sooo secret' }))
+
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 

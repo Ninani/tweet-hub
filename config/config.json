@@ -1,7 +1,8 @@
 {
 	"mongodb": "mongodb://localhost/temp",
 	"twitter": {
-		"key": "#",
-		"secret": "#"
+		"key": "",
+		"secret": "",
+		"callback": "http://localhost:3000/auth/twitter/callback"
 	}
 }

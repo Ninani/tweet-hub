@@ -2,8 +2,7 @@
 // Controllers
 var index = require('../app/controllers/index.js')
 var users = require('../app/controllers/users.js')
-
-//var twitter = require('../controllers/twitter.js')
+var categories = require('../app/controllers/category.js')
 
 // Models
 var User = require('../app/models/user.js');
@@ -22,14 +21,19 @@ module.exports = function (app) {
 	    next();
 	  });
 	});
+	
 
 	/* Users */
-	app.get('/users', 		users.index);
+	// app.get('/users', 		users.index);
 	app.post('/users/new', 	users.create);
-	app.get('/users/:id', users.read);
-	app.put('/users/:id', users.update);
-	app.delete('/users/:id',users.delete);
-
+	app.get('/profile', isAuthenticated, users.read);
+	// app.put('/users/:id', users.update);
+	app.delete('/delete/:id',users.delete);
+	
+	/* Categories */
+	app.get('/api/categories', isAuthenticated, categories.index);
+	app.post('/api/categories', isAuthenticated, categories.create);
+	app.delete('api/categories/:category_id', isAuthenticated, categories.delete);
 
 	/* Sessions */
 	var passport = require('./passport')(app)
@@ -45,8 +49,14 @@ module.exports = function (app) {
 		passport.authenticate('twitter', {failureRedirect: '/signin'}),
 		function (req, res) {
 			req.session.alive = true;
-			res.redirect('/users/'+req.user.id)
+			res.redirect('/profile')
 		})
 
 
+}
+
+function isAuthenticated(req, res, next) {
+	if (req.isAuthenticated()) {return next();}
+	res.redirect('/');
+	
 }

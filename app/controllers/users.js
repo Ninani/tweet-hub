@@ -1,11 +1,10 @@
 
-var User = require('../models/user.js')
+var User = require('../models/user.js');
 
 exports.create = function (req, res) {
 	var user = new User({
 		name: req.body.name
-	})
-
+	});
 	user.save(function (err) {
 		if (err)
 			console.log(err)
@@ -28,7 +27,7 @@ exports.read = function (req, res) {
 			res.send(404)
 		} else {
 			res.render('profile', {
-				user: user, 
+				user: req.user,
 				loggedin: req.session.alive
 			})
 		}
@@ -48,3 +47,6 @@ exports.delete = function (req, res) {
 			})
 	})
 }
+
+
+
