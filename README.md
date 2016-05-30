@@ -4,7 +4,7 @@
 
 ### Run locally:
 ```npm install```<br />
-Add Twitter keys to ```config/config.json```<br />
+Add Twitter keys to ```config/config.json``` and ```app/controllers/twitter.js```<br />
 ```npm start```
 
 ### Deployment:
