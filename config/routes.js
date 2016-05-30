@@ -35,7 +35,6 @@ module.exports = function (app) {
 	app.post('/api/categories', isAuthenticated, categories.create);
 	app.delete('api/categories/:category_id', isAuthenticated, categories.delete);
 
-
 	/* Sessions */
 	var passport = require('./passport')(app)
 
