@@ -1,4 +1,5 @@
 var Category = require('../models/category.js');
+var mongoose = require('mongoose');
 
 exports.index = function(req, res) {
 
@@ -14,14 +15,21 @@ exports.index = function(req, res) {
 exports.add = function(req, res) {
     
     Category.findByIdAndUpdate(
-        req.params.category_id,
+        req.param("category_id"),
         {
-            $push: {'followed_users': req.body.text}
+            $push: {"followed_users": req.body.text}
         },
-        {new: true}
+        {safe: true, upsert: true, new: true},
+        function(err, model) {
+            console.log(err);
+        }
     );
+
+    mongoose.model('Category').find(function(err, category) {
+      console.log(category);
+    });
     
-    Category.findById(req.params.category_id, function(err, category) {
+    Category.findById(req.param("category_id"), function(err, category) {
         if (err)
             res.send(err)
     
