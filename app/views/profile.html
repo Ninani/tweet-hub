@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="twitterModule">
+<html ng-app="twitterModule" xmlns="http://www.w3.org/1999/html">
   <head>
     <title>TweetHub</title>
     <link rel="stylesheet" href="/css/bootstrap.css">
@@ -57,7 +57,6 @@
                     <input type="text" class="form-control input-lg text-center" placeholder="New category" ng-model="formData.text">
                   </div>
 
-                  <!-- createToDo() WILL CREATE NEW CATEGORIES -->
                   <button type="submit" class="btn btn-primary btn-lg" ng-click="createCategory()">Add</button>
                 </form>
               </div>
@@ -70,12 +69,20 @@
               <div class="text-center">
                 <!-- LOOP OVER THE CATEGORIES IN $scope.categories -->
                 <div ng-repeat="category in categories">
-                  <a href="" ng-click="showCategory(category._id, category)">
-                    <h4>
-                        <!--<input type="checkbox" ng-click="deleteCategory(category._id)"> -->
-                        {{ category.text }}
-                    </h4>
-                  </a>
+                  <div class="row">
+                    <div class="col-xs-2 ">
+                      <button type="button" class="btn btn-warning btn-circle" ng-click="deleteCategory(category._id)">
+                        <!--<span class="glyphicon glyphicon-remove"></span>-->
+                        -
+                      </button>
+                    </div>
+                    <div class="col-xs-8">
+                      <a href="" ng-click="showCategory(category._id, category)">
+                        <h4>
+                          {{ category.text }}
+                        </h4>
+                      </a>
+                    </div>
                 </div>
 
               </div>

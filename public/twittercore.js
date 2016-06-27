@@ -72,7 +72,7 @@ function mainController($scope, $http) {
             });
     };
 
-    $scope.deleteCategory = function(category_id, followed_name) {
+    $scope.deleteFollowed = function(category_id, followed_name) {
         $http.delete('/api/followed/' + category_id + '/' + followed_name)
             .success(function(data) {
                 $scope.followed = data;

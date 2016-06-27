@@ -34,7 +34,7 @@ module.exports = function (app) {
 	/* Categories */
 	app.get('/api/categories', isAuthenticated, categories.index);
 	app.post('/api/categories', isAuthenticated, categories.create);
-	app.delete('api/categories/:category_id', isAuthenticated, categories.delete);
+	app.delete('/api/categories/:category_id', categories.delete);
 
 	/* Twitter */
 	app.get('/api/thiscategory/:category_id', twitter.show);
@@ -42,7 +42,7 @@ module.exports = function (app) {
 	/* Followed users */
 	app.get('/api/followed/:category_id', followedUsers.index);
 	app.post('/api/followed/:category_id', followedUsers.add);
-	app.delete('api/followed/:category_id/:followed_user_name',  followedUsers.delete);
+	app.delete('/api/followed/:category_id/:followed_user_name',  followedUsers.delete);
 
 	/* Sessions */
 	var passport = require('./passport')(app)
