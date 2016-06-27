@@ -120,6 +120,7 @@
             <div ng-repeat="tweet in tweets">
               <br>
               <h5>
+                {{ tweet.user.name }} @{{ tweet.user.screen_name }} <br>
                 {{ tweet.text }}
               </h5>
             </div>

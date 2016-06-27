@@ -5,6 +5,7 @@ var users = require('../app/controllers/users.js')
 var categories = require('../app/controllers/category.js')
 var twitter = require('../app/controllers/twitter.js')
 var followedUsers = require('../app/controllers/followedUsers.js')
+var mongoose = require('mongoose');
 // Models
 var User = require('../app/models/user.js');
 
@@ -59,8 +60,7 @@ module.exports = function (app) {
 		function (req, res) {
 			req.session.alive = true;
 			res.redirect('/profile')
-		})
-
+		});
 
 }
 
