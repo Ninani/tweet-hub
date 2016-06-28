@@ -43,7 +43,7 @@ module.exports = function (app) {
 	/* Followed users */
 	app.get('/api/followed/:category_id', followedUsers.index);
 	app.post('/api/followed/:category_id', followedUsers.add);
-	app.delete('/api/followed/:category_id/:followed_user_name',  followedUsers.delete);
+	app.delete('/api/followed/:category_id/:followed_name',  followedUsers.delete);
 
 	/* Sessions */
 	var passport = require('./passport')(app)

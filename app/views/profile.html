@@ -76,21 +76,43 @@
                       </button>
                     </div>
                     <div class="col-xs-8">
-                      <a href="" ng-click="showCategory(category._id, category)">
+                      <a href="" ng-click="showCategory(category._id, category); showFollowedUsers(category._id)">
                         <h4>
                           {{ category.text }}
                         </h4>
                       </a>
                     </div>
+                  </div>
                 </div>
+                <p>
+                </p>
+                <a class="btn btn-default" ng-click="showFollowedUsers(thisCategory._id)">
+                  <span class="glyphicon glyphicon-user"></span> followed users
+                </a>
 
               </div>
-            </div>
+              <div ng-repeat="user in followed.followed_users">
+                <div class="row">
+                  <div class="col-xs-2 ">
+                    <!--<button type="button" class="btn btn-default btn-circle" ng-click="deleteCategory(category._id)">-->
+                    <!--<span class="glyphicon glyphicon-remove"></span>-->
+                    <!--</button>-->
+                  </div>
+                  <div class="col-xs-12 col-xs-offset-1">
+                    <a href="" ng-click="deleteFollowed(thisCategory._id, user)">
+                      <h8>
+                        {{ user }}
+                      </h8>
+                    </a>
+                  </div>
+                </div>
+              </div>
           </li>
         </ul>
       </div>
 
       <!-- /#sidebar-wrapper -->
+
 
       <!-- Page Content -->
       <div id="page-content-wrapper">
@@ -128,6 +150,8 @@
         </div>
       </div>
       <!-- /#page-content-wrapper -->
+
+
 
     </div>
     <!-- /#wrapper -->
