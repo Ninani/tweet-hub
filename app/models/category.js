@@ -2,7 +2,8 @@ var mongoose = require('mongoose')
 
 var CategorySchema = new mongoose.Schema({
     text: String,
-    twitter_id: String
+    twitter_id: String,
+    followed_users: [String]
 });
 
 

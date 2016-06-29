@@ -1,138 +1,185 @@
 <!DOCTYPE html>
-<html ng-app="twitterModule">
-  <head>
+<html ng-app="twitterModule" xmlns="http://www.w3.org/1999/html">
+<head>
     <title>TweetHub</title>
     <link rel="stylesheet" href="/css/bootstrap.css">
-    <link rel='stylesheet' href='/css/style.css' />
+    <link rel='stylesheet' href='/css/style.css'/>
     <!-- Custom CSS -->
     <link href="/css/simple-sidebar.css" rel="stylesheet">
-  </head>
-  <body ng-controller="mainController">
+</head>
+<body ng-controller="mainController">
 
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container-fluid">
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">TweetHub</a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">TweetHub</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
-            <li>
-              <% if(loggedin != undefined) { %>
-              <a> <%= user.name %></a>
-              <% } %>
-            </li>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <% if(loggedin != undefined) { %>
+                    <a> <%= user.name %></a>
+                    <% } %>
+                </li>
 
-            <li>
-              <% if (loggedin != undefined) { %>
-                <a href="/logout">logout</a></li>
-              <% } else { %>
+                <li>
+                    <% if (loggedin != undefined) { %>
+                    <a href="/logout">logout</a></li>
+                <% } else { %>
                 <a href="/auth/twitter">login</a>
-              <% } %>
-            </li>
-          </ul>
+                <% } %>
+                </li>
+            </ul>
         </div>
-      </div>
-    </nav>
-
-    <div id="wrapper">
-
-      <!-- Sidebar -->
-      <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-          <li><br><br></li>
-          <li>
-            <div id="category-form" class="row">
-              <div class="col-sm-8 col-sm-offset-2 text-center">
-                <form>
-                  <div class="form-group">
-
-                    <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
-                    <input type="text" class="form-control input-lg text-center" placeholder="New category" ng-model="formData.text">
-                  </div>
-
-                  <!-- createToDo() WILL CREATE NEW CATEGORIES -->
-                  <button type="submit" class="btn btn-primary btn-lg" ng-click="createCategory()">Add</button>
-                </form>
-              </div>
-            </div>
-          </li>
-          <li><br></li>
-          <li>
-            <div id="category-list" class="row">
-
-              <div class="text-center">
-                <!-- LOOP OVER THE CATEGORIES IN $scope.categories -->
-                <div ng-repeat="category in categories">
-                  <a href="" ng-click="showCategory(category._id, category)">
-                    <h4>
-                        <!--<input type="checkbox" ng-click="deleteCategory(category._id)"> -->
-                        {{ category.text }}
-                    </h4>
-                  </a>
-                </div>
-
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-
-      <!-- /#sidebar-wrapper -->
-
-      <!-- Page Content -->
-      <div id="page-content-wrapper">
-        <div class="container-fluid">
-          <div class="row">
-            <br><br>
-            <div class="col-lg-12">
-              <br><br>
-              <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Categories</a>
-            </div>
-            <div class="text-center">
-              <h2>{{thisCategory.text | uppercase}}</h2>
-            </div>
-            <div ng-repeat="tweet in tweets">
-              <br>
-              <h4>
-                {{ tweet.text }}
-              </h4>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- /#page-content-wrapper -->
-
     </div>
-    <!-- /#wrapper -->
+</nav>
+
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li><br><br></li>
+            <li>
+                <div id="category-form" class="row">
+                    <div class="col-sm-8 col-sm-offset-2 text-center">
+                        <form>
+                            <div class="form-group">
+
+                                <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
+                                <input type="text" class="form-control input-lg text-center" placeholder="New category"
+                                       ng-model="formData.text">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-lg" ng-click="createCategory()">Add
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </li>
+            <li><br></li>
+            <li>
+                <div id="category-list" class="row">
+
+                    <div class="text-center">
+                        <!-- LOOP OVER THE CATEGORIES IN $scope.categories -->
+                        <div ng-repeat="category in categories">
+                            <div class="row">
+                                <div class="col-xs-2 ">
+                                    <button type="button" class="btn btn-default btn-circle"
+                                            ng-click="deleteCategory(category._id)">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                </div>
+                                <div class="col-xs-8">
+                                    <a href=""
+                                       ng-click="showCategory(category._id, category); showFollowedUsers(category._id)">
+                                        <h4>
+                                            {{ category.text }}
+                                        </h4>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <p>
+                        </p>
+                        <a class="btn btn-default" ng-click="showFollowedUsers(thisCategory._id)">
+                            <span class="glyphicon glyphicon-user"></span> followed users
+                        </a>
+
+                    </div>
+                    <div ng-repeat="user in followed.followed_users">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <a href="" ng-click="deleteFollowed(thisCategory._id, user)">
+                                    <h8 class="sidebar-user">
+                                      @{{ user }}
+                                    </h8>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- /#sidebar-wrapper -->
 
 
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <br><br>
+                <div class="col-lg-12">
+                    <br><br>
+                    <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Categories</a>
+                </div>
+                <div class="text-center">
+                    <h2>{{thisCategory.text | uppercase}}</h2>
+                </div>
+                <div id="followed-form" class="row">
+                    <div class="col-sm-8 col-sm-offset-2 text-center">
+                        <form>
+                            <div class="form-group">
 
-    <script src="/js/sidebar/jquery.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/js/sidebar/bootstrap.min.js"></script>
-    <!-- Menu Toggle Script -->
-    <script>
-      $("#menu-toggle").click(function(e) {
+                                <input type="text" class="form-control input-lg text-center" placeholder="user name"
+                                       ng-model="userForm.text">
+                            </div>
+
+                            <!-- createToDo() WILL CREATE NEW CATEGORIES -->
+                            <button type="submit" class="btn btn-primary btn-lg"
+                                    ng-click="createFollowedUser(thisCategory._id)">Follow
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div ng-repeat="tweet in tweets">
+                    <br>
+                    <img src={{tweet.user.profile_image_url}} alt="" style="display: inline-block">
+                    <h5 style="display: inline-block;">
+                        {{ tweet.user.name }} @{{ tweet.user.screen_name }} <br>
+                        {{ tweet.text }}
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+
+</div>
+<!-- /#wrapper -->
+
+
+<script src="/js/sidebar/jquery.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/sidebar/bootstrap.min.js"></script>
+<!-- Menu Toggle Script -->
+<script>
+    $("#menu-toggle").click(function (e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
-      });
-    </script>
+    });
+</script>
 
-    <script src="/js/libs/jquery/dist/jquery.js"></script>
-    <script src="/js/libs/underscore/underscore.js"></script>
-    <!--<script src="/js/libs/backbone/backbone.js"></script>-->
-    <script src="/js/libs/handlebars/handlebars.js"></script>
-    <!--<script src="/js/hbs/templates.js"></script>-->
-    <!--<script src="/js/main.js"></script>-->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
-    <script src="twittercore.js"></script>
+<script src="/js/libs/jquery/dist/jquery.js"></script>
+<script src="/js/libs/underscore/underscore.js"></script>
+<!--<script src="/js/libs/backbone/backbone.js"></script>-->
+<script src="/js/libs/handlebars/handlebars.js"></script>
+<!--<script src="/js/hbs/templates.js"></script>-->
+<!--<script src="/js/main.js"></script>-->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+<script src="twittercore.js"></script>
 
-  </body>
+</body>
 </html>

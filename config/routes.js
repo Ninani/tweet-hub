@@ -4,6 +4,8 @@ var index = require('../app/controllers/index.js')
 var users = require('../app/controllers/users.js')
 var categories = require('../app/controllers/category.js')
 var twitter = require('../app/controllers/twitter.js')
+var followedUsers = require('../app/controllers/followedUsers.js')
+var mongoose = require('mongoose');
 // Models
 var User = require('../app/models/user.js');
 
@@ -33,10 +35,15 @@ module.exports = function (app) {
 	/* Categories */
 	app.get('/api/categories', isAuthenticated, categories.index);
 	app.post('/api/categories', isAuthenticated, categories.create);
-	app.delete('api/categories/:category_id', isAuthenticated, categories.delete);
+	app.delete('/api/categories/:category_id', categories.delete);
 
 	/* Twitter */
 	app.get('/api/thiscategory/:category_id', twitter.show);
+
+	/* Followed users */
+	app.get('/api/followed/:category_id', followedUsers.index);
+	app.post('/api/followed/:category_id', followedUsers.add);
+	app.delete('/api/followed/:category_id/:followed_name',  followedUsers.delete);
 
 	/* Sessions */
 	var passport = require('./passport')(app)
@@ -53,8 +60,7 @@ module.exports = function (app) {
 		function (req, res) {
 			req.session.alive = true;
 			res.redirect('/profile')
-		})
-
+		});
 
 }
 

@@ -19,16 +19,20 @@ exports.show = function(req, res) {
     var twitter = new Twitter(config);
 
     // use mongoose to get all todos in the database
-    Category.findById(req.params.category_id, function(err, category) {
+    Category.findById(req.param('category_id'), function(err, category) {
 
         console.log(category);
         // if there is an error retrieving, send the error. nothing after res.send(err) will execute
         if (err)
             res.send(err)
 
-        twitter.getHomeTimeline({count: '5'}, error, function (data) {
+        twitter.getHomeTimeline({count: '30'}, error, function (data) {
             // console.log('Data [%s]', data);
-            res.send(data);
+            var tweets = JSON.parse(data);
+            var filtered = tweets.filter(function (tweet) {
+                return category.followed_users.indexOf(tweet.user.screen_name) >= 0;
+            });
+            res.send(filtered);
         });
         // res.json(category); // return all categories in JSON format
     });

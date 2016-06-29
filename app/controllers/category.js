@@ -6,7 +6,6 @@ var Category = require('../models/category.js');
 
 exports.index = function(req, res) {
 
-    // use mongoose to get all todos in the database
     Category.find({twitter_id: req.user.twitter_id}, function(err, categories) {
 
         // if there is an error retrieving, send the error. nothing after res.send(err) will execute
