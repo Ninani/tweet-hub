@@ -34,9 +34,16 @@ exports.add = function(req, res) {
 }
 
 exports.delete = function(req, res) {
-    Category.update(
-        {_id: req.params.category_id},
-        {$pull: {followed_users: [req.params.followed_name]}}
+
+    Category.findByIdAndUpdate(
+        req.param("category_id"),
+        {
+            $pull: {"followed_users": req.param("followed_name")}
+        },
+        {safe: true, upsert: true, new: true},
+        function(err, model) {
+            console.log(err);
+        }
     );
 
     Category.findById(req.param("category_id"), function(err, category) {

@@ -96,6 +96,10 @@
     background: none;
 }
 
+.sidebar-user {
+    margin-left: 30px;
+}
+
 @media(min-width:768px) {
     #wrapper {
         padding-left: 250px;

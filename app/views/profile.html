@@ -98,15 +98,10 @@
                     </div>
                     <div ng-repeat="user in followed.followed_users">
                         <div class="row">
-                            <div class="col-xs-2 ">
-                                <!--<button type="button" class="btn btn-default btn-circle" ng-click="deleteCategory(category._id)">-->
-                                <!--<span class="glyphicon glyphicon-remove"></span>-->
-                                <!--</button>-->
-                            </div>
-                            <div class="col-xs-12 col-xs-offset-1">
+                            <div class="col-xs-12">
                                 <a href="" ng-click="deleteFollowed(thisCategory._id, user)">
-                                    <h8>
-                                        {{ user }}
+                                    <h8 class="sidebar-user">
+                                      @{{ user }}
                                     </h8>
                                 </a>
                             </div>
