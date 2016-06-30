@@ -28,6 +28,5 @@ describe('Test app sessions', function () {
                 done()
             });
     });
-
-
+    
 });
