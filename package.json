@@ -12,6 +12,7 @@
     "twitter-node-client": "*"
   },
   "devDependencies": {
+    "chai": "*",
     "grunt": "*",
     "grunt-contrib-handlebars": "*",
     "grunt-contrib-jshint": "*",
@@ -19,7 +20,7 @@
     "grunt-contrib-uglify": "*",
     "mocha": "*",
     "supertest": "*",
-    "chai": "*"
+    "zombie": "^4.2.1"
   },
   "scripts": {
     "start": "node app.js"
